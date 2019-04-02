@@ -40,10 +40,11 @@ void draw() {
       pushMatrix();
       translate((i+1) * MARGIN + i * littlePaperWidth, (j+1) * MARGIN + j * littlePaperHeight);
       fill(LITTLE_PAPER_BACKGROUND_COLOR);
-      rectMode(CORNER);
-      rect(0, 0, littlePaperWidth, littlePaperHeight);
+      
       rectMode(CENTER);
+      rect(littlePaperWidth/2, littlePaperHeight/2, littlePaperWidth, littlePaperHeight);
       fill(255);
+      ellipse(10,10,3,3);
       try {
         text (affirmations[indexOfAffirmation], littlePaperWidth/2, littlePaperHeight/2, littlePaperWidth - PADDING, littlePaperHeight);
       } 
