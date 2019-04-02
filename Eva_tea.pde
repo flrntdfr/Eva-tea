@@ -1,5 +1,8 @@
 // Florent Dufour
 // April 2018
+// Renders a planche of yogi-tea affirmations
+
+import processing.pdf.*;
 
 final int ONE_CM_IN_PIX = 28;
 final int CANEVAS_WIDTH = 595;
@@ -21,6 +24,7 @@ void setup() {
   affirmations = loadStrings("affirmations.txt");
   println(affirmations[0]);
   textAlign(CENTER, CENTER);
+  beginRecord(PDF, "out/planche_Eva_tea.pdf");
 }
 
 void draw() {
@@ -55,6 +59,8 @@ void draw() {
       popMatrix();
     }
   }
+  saveFrame("out/planche_Eva_tea.tiff");
+  endRecord();
 }
 
 int cmToPix(float cm) {
