@@ -2,21 +2,21 @@
 // April 2018
 // Renders a planche of yogi-tea affirmations
 
-// Caveat: does not support multi page
+// Caveat: max ... affirmations can be rendered. Does not support multi-page.
 
 import processing.pdf.*;
 
-final int SCALE = 3; // Experimental, switch back to 1 for normal behavior
-final int ONE_CM_IN_PIX = SCALE * 28;
-final int CANEVAS_WIDTH = SCALE * 595;
-final int CANEVAS_HEIGHT = SCALE * 842;
+final int ONE_CM_IN_PIX = 28;
+final int CANEVAS_WIDTH = 595;
+final int CANEVAS_HEIGHT = 842;
 final float LITTLE_PAPER_WIDTH_IN_CM = 3.1;
 final float LITTLE_PAPER_HEIGHT_IN_CM =  2.8;
 final int MARGIN = cmToPix(0.3);
 final int PADDING = cmToPix(0.5);
 final int LITTLE_PAPER_BACKGROUND_COLOR = color(176, 26, 83);
-//final int LITTLE_PAPER_FONT_COLOR = 51;
-final int TEXT_FONT_SIZE = SCALE * 8;
+final int LITTLE_PAPER_FONT_COLOR = 255;
+final int TEXT_FONT_SIZE = 8;
+PFont TEXT_FONT;
 String[] affirmations;
 
 void setup() {
@@ -24,13 +24,18 @@ void setup() {
   background(255);
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
+  TEXT_FONT = createFont("Avenir", 32);
+  textFont(TEXT_FONT);
   textSize(TEXT_FONT_SIZE);
   affirmations = loadStrings("affirmations.txt");
-  surface.setSize(CANEVAS_WIDTH, CANEVAS_HEIGHT);
-  println("[INFO] Canevas size: " + width + "px / " + height + "px");
-  println("[INFO] " + affirmations.length + " affirmations loaded from file");
+  size(595, 842, PDF, "out/render.pdf");
 
-  //beginRecord(PDF, "out/planche_Eva_tea.pdf");
+  println("[INFO] Canevas size: " + width + "px / " + height + "px");
+  if (affirmations.length <= 54) {
+    println("[INFO] " + affirmations.length + " affirmations loaded from file");
+  } else {
+    println("[ERROR] " + affirmations.length + " affirmations loaded. Too much.");
+  }
 }
 
 void draw() {
@@ -58,8 +63,8 @@ void draw() {
         fill(LITTLE_PAPER_BACKGROUND_COLOR);
 
         rect(littlePaperWidth/2, littlePaperHeight/2, littlePaperWidth, littlePaperHeight);
-        fill(255);
-        ellipse(SCALE * 10, SCALE * 10, SCALE * 3, SCALE * 3);
+        fill(LITTLE_PAPER_FONT_COLOR);
+        ellipse(10, 10, 3, 3);
         text (affirmation, littlePaperWidth/2, littlePaperHeight/2, littlePaperWidth - PADDING, littlePaperHeight);
       } 
       catch (Exception e) {
@@ -70,8 +75,8 @@ void draw() {
       popMatrix();
     }
   }
-  saveFrame("out/planche_Eva_tea.tiff");
-  //endRecord();
+  println("[INFO] Output rendered");
+  exit();
 }
 
 /**
