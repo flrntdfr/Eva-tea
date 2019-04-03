@@ -28,7 +28,7 @@ void setup() {
   textFont(TEXT_FONT);
   textSize(TEXT_FONT_SIZE);
   affirmations = loadStrings("affirmations.txt");
-  size(595, 842, PDF, "out/render.pdf");
+  size(595, 842, PDF, "out/render.pdf"); // Size does not support variables and surfacce.setSize() does not support PDF rendering... So... hardcoded values.
 
   println("[INFO] Canevas size: " + width + "px / " + height + "px");
   if (affirmations.length <= 54) {
@@ -39,7 +39,6 @@ void setup() {
 }
 
 void draw() {
-  noStroke();
   final int NUMBER_OF_COLUMNS = getMaxElements(cmToPix(LITTLE_PAPER_WIDTH_IN_CM), CANEVAS_WIDTH, MARGIN);
   final int NUMBER_OF_ROWS = getMaxElements(cmToPix(LITTLE_PAPER_HEIGHT_IN_CM), CANEVAS_HEIGHT, MARGIN);
 
