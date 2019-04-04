@@ -21,6 +21,7 @@ String[] affirmations;
 
 void setup() {
   noLoop();
+  noStroke();
   background(255);
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
