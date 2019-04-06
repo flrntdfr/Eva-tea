@@ -1,6 +1,6 @@
 // Florent Dufour
 // April 2018
-// Renders a planche of yogi-tea affirmations
+// Renders a planche of yogi-tea affirmations of your own as a pdf.
 
 // Caveat: max ... affirmations can be rendered. Does not support multi-page.
 
@@ -9,11 +9,11 @@ import processing.pdf.*;
 final int ONE_CM_IN_PIX = 28;
 final int CANEVAS_WIDTH = 595;
 final int CANEVAS_HEIGHT = 842;
-final float LITTLE_PAPER_WIDTH_IN_CM = 3.1;
+final float LITTLE_PAPER_WIDTH_IN_CM = 3.2;
 final float LITTLE_PAPER_HEIGHT_IN_CM =  2.8;
 final int MARGIN = cmToPix(0.3);
 final int PADDING = cmToPix(0.5);
-final int LITTLE_PAPER_BACKGROUND_COLOR = color(176, 26, 83);
+final int LITTLE_PAPER_BACKGROUND_COLOR = color(189, 28, 66);
 final int LITTLE_PAPER_FONT_COLOR = 255;
 final int TEXT_FONT_SIZE = 8;
 PFont TEXT_FONT;
@@ -25,7 +25,7 @@ void setup() {
   background(255);
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
-  TEXT_FONT = createFont("Avenir", 32);
+  TEXT_FONT = createFont("Avenir-Heavy", 32);
   textFont(TEXT_FONT);
   textSize(TEXT_FONT_SIZE);
   affirmations = loadStrings("affirmations.txt");
@@ -61,7 +61,6 @@ void draw() {
         String affirmation = affirmations[indexOfAffirmation];
         translate((i+1) * MARGIN + i * littlePaperWidth, (j+1) * MARGIN + j * littlePaperHeight);
         fill(LITTLE_PAPER_BACKGROUND_COLOR);
-
         rect(littlePaperWidth/2, littlePaperHeight/2, littlePaperWidth, littlePaperHeight);
         fill(LITTLE_PAPER_FONT_COLOR);
         ellipse(10, 10, 3, 3);
